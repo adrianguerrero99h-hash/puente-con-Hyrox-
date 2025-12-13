@@ -1,5 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'TestVAM';
 
 // Helper function to format decimal minutes to mm:ss format
 const formatPace = (decimalMinutes: number): string => {
@@ -13,9 +16,17 @@ const formatPace = (decimalMinutes: number): string => {
 
 const TestVAM: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [distance, setDistance] = useState<number | ''>(1480); // Default example value
+    const [distance, setDistance] = useState<number | ''>('');
+
+    useEffect(() => {
+        const savedData = getSingleTestResult(TEST_ID);
+        if (savedData && typeof savedData.distance === 'number') {
+            setDistance(savedData.distance);
+        }
+    }, []);
 
     const handleSave = (newDistance: number | '') => {
+        saveSingleTestResult(TEST_ID, { distance: newDistance });
         setDistance(newDistance);
         setIsEditing(false);
     };

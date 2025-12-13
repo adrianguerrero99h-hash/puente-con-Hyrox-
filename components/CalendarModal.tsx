@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { formatDate, isSummerRestPeriod } from '../utils/date';
-import { isExclusivelyRunningDay } from '../utils/workoutUtils';
-import type { TrainingData, Workout } from '../types';
+import { formatDate } from '../utils/date';
 
 interface CalendarModalProps {
     isOpen: boolean;
     onClose: () => void;
     selectedDate: Date;
     onDateSelect: (date: Date) => void;
-    trainingData: TrainingData;
 }
 
-const CalendarModal: React.FC<CalendarModalProps> = ({ isOpen, onClose, selectedDate, onDateSelect, trainingData }) => {
+const CalendarModal: React.FC<CalendarModalProps> = ({ isOpen, onClose, selectedDate, onDateSelect }) => {
     const [displayDate, setDisplayDate] = useState(new Date(selectedDate));
 
     useEffect(() => {
@@ -40,30 +37,25 @@ const CalendarModal: React.FC<CalendarModalProps> = ({ isOpen, onClose, selected
         const prevMonthLastDate = prevMonthLastDay.getDate();
 
         const grid = [];
-
-        const getWorkoutForDate = (date: Date): Workout | undefined => {
-            if (!trainingData) return undefined;
-            return trainingData[formatDate(date)];
-        }
         
         // Days from previous month
         for (let i = firstDayIndex; i > 0; i--) {
             const day = prevMonthLastDate - i + 1;
             const date = new Date(year, month - 1, day);
-            grid.push(<DayCell key={`prev-${day}`} date={date} workout={getWorkoutForDate(date)} isOtherMonth onSelect={onDateSelect} />);
+            grid.push(<DayCell key={`prev-${day}`} date={date} isOtherMonth onSelect={onDateSelect} />);
         }
         
         // Days from current month
         for (let day = 1; day <= lastDate; day++) {
             const date = new Date(year, month, day);
-            grid.push(<DayCell key={`curr-${day}`} date={date} workout={getWorkoutForDate(date)} isSelected={formatDate(date) === formatDate(selectedDate)} onSelect={onDateSelect} />);
+            grid.push(<DayCell key={`curr-${day}`} date={date} isSelected={formatDate(date) === formatDate(selectedDate)} onSelect={onDateSelect} />);
         }
         
         // Days from next month
         const nextMonthDays = 42 - grid.length;
         for (let day = 1; day <= nextMonthDays; day++) {
             const date = new Date(year, month + 1, day);
-            grid.push(<DayCell key={`next-${day}`} date={date} workout={getWorkoutForDate(date)} isOtherMonth onSelect={onDateSelect} />);
+            grid.push(<DayCell key={`next-${day}`} date={date} isOtherMonth onSelect={onDateSelect} />);
         }
 
         return grid;
@@ -97,27 +89,20 @@ const CalendarModal: React.FC<CalendarModalProps> = ({ isOpen, onClose, selected
 
 interface DayCellProps {
     date: Date;
-    workout: Workout | undefined;
     isSelected?: boolean;
     isOtherMonth?: boolean;
     onSelect: (date: Date) => void;
 }
 
-const DayCell: React.FC<DayCellProps> = ({ date, workout, isSelected, isOtherMonth, onSelect }) => {
-    const isSummerBreak = isSummerRestPeriod(date);
-    const isRunDay = !isSummerBreak && isExclusivelyRunningDay(workout);
-
-    const baseClasses = "aspect-square flex items-center justify-center rounded-full cursor-pointer transition-colors duration-200 border";
-    let stateClasses = "bg-gray-800 border-gray-800 hover:border-amber-400";
+const DayCell: React.FC<DayCellProps> = ({ date, isSelected, isOtherMonth, onSelect }) => {
+    const baseClasses = "aspect-square flex items-center justify-center rounded-full cursor-pointer transition-colors duration-200 border border-transparent";
+    let stateClasses = "bg-gray-800 hover:border-amber-400";
 
     if (isOtherMonth) {
-        stateClasses = "text-gray-600 border-transparent hover:bg-gray-700";
-    } else if (isRunDay) {
-        stateClasses = 'bg-orange-800 border-orange-600 text-white hover:border-orange-400';
+        stateClasses = "text-gray-600 hover:bg-gray-700";
     }
-
     if (isSelected) {
-        stateClasses = "bg-amber-400 text-black font-bold border-amber-400";
+        stateClasses = "bg-amber-400 text-black font-bold";
     }
 
     return (

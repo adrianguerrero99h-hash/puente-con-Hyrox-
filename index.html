@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hyrox Training Program</title>
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#fbbf24">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +11,9 @@
     <style>
       body {
         font-family: 'Inter', sans-serif;
-        background-color: #0c0c0c;
+        background-color: #0c0c0c; /* Fallback */
+        background-image: radial-gradient(ellipse at top, hsl(0, 0%, 15%) 0%, #0c0c0c 80%);
+        background-repeat: no-repeat;
       }
       /* Custom scrollbar for a more integrated look */
       ::-webkit-scrollbar {
@@ -44,6 +44,13 @@
       .animate-fade-in-fast {
         animation: fadeIn 0.3s ease-in-out forwards;
       }
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
     </style>
   <script type="importmap">
 {
@@ -52,14 +59,14 @@
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "vite": "https://aistudiocdn.com/vite@^7.1.12",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.0"
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0"
   }
 }
 </script>
 </head>
   <body>
     <div id="root"></div>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

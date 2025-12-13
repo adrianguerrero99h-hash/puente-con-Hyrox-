@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'TestCargaMaximaSledPush';
 
 const TestCargaMaximaSledPush: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [maxWeight, setMaxWeight] = useState<number | ''>(265); // Example initial value
+    const [maxWeight, setMaxWeight] = useState<number | ''>(''); 
+    
+    useEffect(() => {
+        const savedData = getSingleTestResult(TEST_ID);
+        if (savedData && typeof savedData.maxWeight === 'number') {
+            setMaxWeight(savedData.maxWeight);
+        }
+    }, []);
+
     const hasResult = maxWeight !== '';
 
     const handleSave = () => {
-        console.log('Saving result:', maxWeight);
+        saveSingleTestResult(TEST_ID, { maxWeight });
         setIsEditing(false);
     };
 

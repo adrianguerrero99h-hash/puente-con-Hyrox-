@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'TestSprintSledPush';
 
 const initialTimes = {
     attempt1: '',
@@ -11,6 +14,14 @@ const initialTimes = {
 const TestSprintSledPush: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [times, setTimes] = useState(initialTimes);
+    
+    useEffect(() => {
+        const savedData = getSingleTestResult(TEST_ID);
+        if (savedData) {
+            setTimes(savedData);
+        }
+    }, []);
+
     const hasResults = Object.values(times).some(time => time !== '');
 
     const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +34,7 @@ const TestSprintSledPush: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     };
     
     const handleSave = () => {
-        console.log('Saving results:', times);
+        saveSingleTestResult(TEST_ID, times);
         setIsEditing(false);
     }
     

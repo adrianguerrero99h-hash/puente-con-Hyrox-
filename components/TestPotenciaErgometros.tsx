@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'TestPotenciaErgometros';
 
 const initialTimes = {
     ski100: '',
@@ -11,6 +14,14 @@ const initialTimes = {
 const TestPotenciaErgometros: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [times, setTimes] = useState(initialTimes);
+
+    useEffect(() => {
+        const savedData = getSingleTestResult(TEST_ID);
+        if (savedData) {
+            setTimes(savedData);
+        }
+    }, []);
+    
     const hasResults = Object.values(times).some(time => time !== '');
 
     const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,8 +34,7 @@ const TestPotenciaErgometros: React.FC<{ onBack: () => void }> = ({ onBack }) =>
     };
     
     const handleSave = () => {
-        // Here you would typically save the data to a backend or local storage
-        console.log('Saving results:', times);
+        saveSingleTestResult(TEST_ID, times);
         setIsEditing(false);
     }
     

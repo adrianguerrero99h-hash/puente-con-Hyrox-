@@ -1,5 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'TestFTPBikeErg';
 
 const CheckIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -16,9 +19,18 @@ const NumberIcon: React.FC<{ num: number }> = ({ num }) => (
 const TestFTPBikeErg: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [avgPower, setAvgPower] = useState<number | ''>('');
+
+    useEffect(() => {
+        const savedData = getSingleTestResult(TEST_ID);
+        if (savedData && typeof savedData.avgPower === 'number') {
+            setAvgPower(savedData.avgPower);
+        }
+    }, []);
+
     const hasResult = avgPower !== '';
 
     const handleSave = () => {
+        saveSingleTestResult(TEST_ID, { avgPower });
         setIsEditing(false);
     };
 

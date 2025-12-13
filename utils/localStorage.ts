@@ -1,5 +1,10 @@
+import type { StravaAuth, StravaActivity } from '../types';
+
 const AUTH_KEY = 'hyrox_auth';
 const ONBOARDING_KEY_PREFIX = 'hyrox_onboarding_';
+const STRAVA_AUTH_KEY_PREFIX = 'strava_auth_';
+const STRAVA_ACTIVITIES_KEY_PREFIX = 'strava_activities_';
+
 
 export interface AuthData {
     isAuthenticated: boolean;
@@ -22,11 +27,6 @@ export const setAuth = (username: string): void => {
 };
 
 export const clearAuth = (): void => {
-    const authData = getAuth();
-    if(authData.username) {
-        // We keep the onboarding status even after logout
-        // so the user doesn't see it again on re-login.
-    }
     localStorage.removeItem(AUTH_KEY);
 };
 
@@ -36,4 +36,39 @@ export const getOnboardingStatus = (username: string): boolean => {
 
 export const setOnboardingStatus = (username: string): void => {
     localStorage.setItem(`${ONBOARDING_KEY_PREFIX}${username}`, 'true');
+};
+
+// --- User-Specific Strava LocalStorage Utils ---
+
+export const getStravaAuth = (username: string): StravaAuth | null => {
+    try {
+        const data = localStorage.getItem(`${STRAVA_AUTH_KEY_PREFIX}${username}`);
+        return data ? JSON.parse(data) : null;
+    } catch (error) {
+        console.error("Failed to parse Strava auth data", error);
+        return null;
+    }
+};
+
+export const setStravaAuth = (username: string, authData: StravaAuth): void => {
+    localStorage.setItem(`${STRAVA_AUTH_KEY_PREFIX}${username}`, JSON.stringify(authData));
+};
+
+export const getStravaActivities = (username: string): StravaActivity[] => {
+    try {
+        const data = localStorage.getItem(`${STRAVA_ACTIVITIES_KEY_PREFIX}${username}`);
+        return data ? JSON.parse(data) : [];
+    } catch (error) {
+        console.error("Failed to parse Strava activities", error);
+        return [];
+    }
+};
+
+export const setStravaActivities = (username: string, activities: StravaActivity[]): void => {
+    localStorage.setItem(`${STRAVA_ACTIVITIES_KEY_PREFIX}${username}`, JSON.stringify(activities));
+};
+
+export const clearStravaData = (username: string): void => {
+    localStorage.removeItem(`${STRAVA_AUTH_KEY_PREFIX}${username}`);
+    localStorage.removeItem(`${STRAVA_ACTIVITIES_KEY_PREFIX}${username}`);
 };

@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'TestCargaMaximaSledPullDrag';
+
+const initialWeights = { sledPull: '', sledDrag: '' };
 
 const TestCargaMaximaSledPullDrag: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [savedWeights, setSavedWeights] = useState({ sledPull: '150', sledDrag: '140' });
-    const [currentWeights, setCurrentWeights] = useState(savedWeights);
+    const [savedWeights, setSavedWeights] = useState(initialWeights);
+    const [currentWeights, setCurrentWeights] = useState(initialWeights);
+    
+    useEffect(() => {
+        const data = getSingleTestResult(TEST_ID);
+        if (data) {
+            setSavedWeights(data);
+            setCurrentWeights(data);
+        }
+    }, []);
 
     const handleSave = () => {
+        saveSingleTestResult(TEST_ID, currentWeights);
         setSavedWeights(currentWeights);
         setIsEditing(false);
     };
@@ -20,6 +34,8 @@ const TestCargaMaximaSledPullDrag: React.FC<{ onBack: () => void }> = ({ onBack 
         setCurrentWeights(savedWeights);
         setIsEditing(true);
     };
+    
+    const hasResults = savedWeights.sledPull || savedWeights.sledDrag;
 
     return (
         <TestPageLayout onBack={onBack} title="Test Carga Máxima Sled Pull & Drag">
@@ -88,17 +104,37 @@ const TestCargaMaximaSledPullDrag: React.FC<{ onBack: () => void }> = ({ onBack 
                     </div>
                 ) : (
                     <div className="text-center">
-                        <h3 className="text-lg font-bold text-amber-400 mb-4">Resultados</h3>
-                        <div className="space-y-3">
-                            <p className="text-white text-2xl md:text-3xl font-bold">Peso máximo Sled Pull: <span className="text-amber-400">{savedWeights.sledPull || '0'} Kg</span></p>
-                            <p className="text-white text-2xl md:text-3xl font-bold">Peso máximo Sled Drag: <span className="text-amber-400">{savedWeights.sledDrag || '0'} Kg</span></p>
-                        </div>
-                        <button
-                            onClick={handleEditClick}
-                            className="mt-6 bg-gray-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-amber-400 hover:text-black transition-colors"
-                        >
-                            Actualizar resultados
-                        </button>
+                        {hasResults ? (
+                            <>
+                                <h3 className="text-lg font-bold text-amber-400 mb-4">Resultados</h3>
+                                <div className="flex justify-center gap-8">
+                                    <div>
+                                        <p className="text-gray-400 text-sm">Sled Pull</p>
+                                        <p className="text-white text-2xl font-bold">{savedWeights.sledPull || 'N/A'} Kg</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-gray-400 text-sm">Sled Drag</p>
+                                        <p className="text-white text-2xl font-bold">{savedWeights.sledDrag || 'N/A'} Kg</p>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={handleEditClick}
+                                    className="mt-6 bg-gray-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-amber-400 hover:text-black transition-colors"
+                                >
+                                    Actualizar resultados
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <p className="text-gray-400 mb-4">Aún no has ingresado tus resultados</p>
+                                <button
+                                    onClick={handleEditClick}
+                                    className="bg-amber-400 text-black font-bold py-2 px-6 rounded-lg hover:bg-amber-500 transition-colors"
+                                >
+                                    Actualizar resultados
+                                </button>
+                            </>
+                        )}
                     </div>
                 )}
             </div>

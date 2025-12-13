@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
+
+const TEST_ID = 'Test10kRun';
 
 const initialResults = {
     distance: '10K',
@@ -16,8 +19,17 @@ const initialResults = {
 const Test10kRun: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const [savedResults, setSavedResults] = useState(initialResults);
     const [isEditing, setIsEditing] = useState(false);
-    const [currentResults, setCurrentResults] = useState(savedResults);
+    const [currentResults, setCurrentResults] = useState(initialResults);
     
+    useEffect(() => {
+        const data = getSingleTestResult(TEST_ID);
+        if (data) {
+            const resultsWithDefaults = { ...initialResults, ...data };
+            setSavedResults(resultsWithDefaults);
+            setCurrentResults(resultsWithDefaults);
+        }
+    }, []);
+
     const hasResults = Object.values(savedResults).some(value => value !== '' && value !== '10K');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +38,7 @@ const Test10kRun: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     };
 
     const handleSave = () => {
+        saveSingleTestResult(TEST_ID, currentResults);
         setSavedResults(currentResults);
         setIsEditing(false);
     };

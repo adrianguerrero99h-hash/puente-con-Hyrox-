@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { formatDate, getMonday, isSummerRestPeriod } from '../utils/date';
+import { formatDate, getMonday } from '../utils/date';
 import { isExclusivelyRunningDay } from '../utils/workoutUtils';
 import type { TrainingData } from '../types';
 
@@ -30,15 +30,17 @@ const WeekNav: React.FC<WeekNavProps> = ({ selectedDate, onDateSelect, trainingD
                 const isActive = dateString === formatDate(selectedDate);
                 const workout = trainingData[dateString];
                 
-                const isSummerBreak = isSummerRestPeriod(date);
-                const isRunDay = !isSummerBreak && isExclusivelyRunningDay(workout);
+                const isRunDay = isExclusivelyRunningDay(workout);
 
                 let dayCardClasses = 'flex-1 p-1 sm:p-2 text-center border-2 rounded-lg cursor-pointer transition-colors duration-200 flex flex-col justify-center items-center';
                 
                 let baseBgClass = 'bg-black';
                 let baseBorderClass = 'border-gray-700';
 
-                if (isRunDay) {
+                if (workout?.restDay) {
+                    baseBgClass = 'bg-green-900';
+                    baseBorderClass = 'border-green-600';
+                } else if (isRunDay) {
                     baseBgClass = 'bg-orange-800';
                     baseBorderClass = 'border-orange-600';
                 }
@@ -49,7 +51,7 @@ const WeekNav: React.FC<WeekNavProps> = ({ selectedDate, onDateSelect, trainingD
                 
                 dayCardClasses += ` ${baseBgClass} ${baseBorderClass}`;
 
-                if (!isActive && !isRunDay) {
+                if (!isActive && !workout?.restDay && !isRunDay) {
                      dayCardClasses += ' hover:border-amber-400';
                 }
 

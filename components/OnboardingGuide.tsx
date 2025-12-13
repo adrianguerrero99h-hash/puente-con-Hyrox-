@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface OnboardingGuideProps {
     username: string;
@@ -91,16 +91,19 @@ const tourSteps = [
 const OnboardingGuide: React.FC<OnboardingGuideProps> = ({ username, onFinish }) => {
     const [step, setStep] = useState(0);
 
+    useEffect(() => {
+        // Gracefully handle the edge case where there are no tour steps defined.
+        if (tourSteps.length === 0) {
+            onFinish();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Run only once on mount.
+
     const nextStep = () => setStep(s => s + 1);
     const prevStep = () => setStep(s => s - 1);
     
     const totalSteps = tourSteps.length;
 
-    if (step > totalSteps + 1) {
-        onFinish();
-        return null;
-    }
-    
     const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
     // Welcome Modal
@@ -126,7 +129,7 @@ const OnboardingGuide: React.FC<OnboardingGuideProps> = ({ username, onFinish })
     }
 
     // Finish Modal
-    if (step === totalSteps + 1) {
+    if (step > totalSteps) {
          return (
             <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 animate-fade-in-fast">
                 <div className="bg-gray-900 border-2 border-amber-400 rounded-lg p-8 max-w-md w-full text-center">
@@ -144,6 +147,13 @@ const OnboardingGuide: React.FC<OnboardingGuideProps> = ({ username, onFinish })
     
     const currentStep = tourSteps[step - 1];
 
+    // This is the crucial fix: If for any reason the current step is not found,
+    // we exit the onboarding process gracefully instead of crashing the app.
+    if (!currentStep) {
+        onFinish();
+        return null;
+    }
+
     return (
         <div className="fixed inset-0 z-[99] animate-fade-in-fast">
             {/* Overlay */}
@@ -152,13 +162,13 @@ const OnboardingGuide: React.FC<OnboardingGuideProps> = ({ username, onFinish })
             {/* Highlight Box */}
             <div 
                 className="fixed border-4 border-amber-400 rounded-lg shadow-2xl shadow-amber-500/50 z-[101] pointer-events-none"
-                style={currentStep.highlightStyle}
+                style={currentStep.highlightStyle as React.CSSProperties}
             ></div>
 
             {/* Tooltip */}
             <div 
                 className="fixed bg-gray-900 border-2 border-gray-700 rounded-lg p-5 max-w-xs w-full z-[102] animate-fade-in-fast"
-                style={currentStep.tooltipStyle}
+                style={currentStep.tooltipStyle as React.CSSProperties}
             >
                 <h3 className="text-lg font-bold text-amber-400 mb-2">{currentStep.title}</h3>
                 <p className="text-gray-300 text-sm mb-4">{currentStep.text}</p>
@@ -172,7 +182,7 @@ const OnboardingGuide: React.FC<OnboardingGuideProps> = ({ username, onFinish })
                             </button>
                         )}
                         <button onClick={nextStep} className="bg-amber-400 text-black font-bold py-1 px-3 rounded-md hover:bg-amber-500 transition-colors text-sm">
-                            Siguiente
+                            {step === totalSteps ? 'Finalizar' : 'Siguiente'}
                         </button>
                     </div>
                 </div>

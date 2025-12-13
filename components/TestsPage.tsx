@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import TestPotenciaErgometros from './TestPotenciaErgometros';
 import Test2kErg from './Test2kErg';
 import TestVAM from './TestVAM';
@@ -8,6 +8,8 @@ import TestCargaMaximaSledPush from './TestCargaMaximaSledPush';
 import TestCargaMaximaSledPullDrag from './TestCargaMaximaSledPullDrag';
 import TestFTPBikeErg from './TestFTPBikeErg';
 import TestSprintSledPullDrag from './TestSprintSledPullDrag';
+import { getTestResults, saveTestResults } from '../utils/testResults';
+
 
 // --- Icon Components ---
 const RunIcon = () => (
@@ -41,39 +43,97 @@ const testsData = [
 ];
 
 const TestsGrid = ({ onTestSelect }: { onTestSelect: (id: string) => void }) => (
-    <>
-        <div className="text-center p-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter mb-2">Test VAM & Ergómetros</h1>
-            <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">Selecciona un test para ver los detalles e introducir tus resultados.</p>
+    <div className="p-4 sm:p-8 pt-0 bg-[#0c0c0c]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {testsData.map((test) => (
+                <div 
+                    key={test.id} 
+                    className="group border-2 border-gray-800 rounded-lg bg-gray-900/50 flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:border-amber-400 hover:bg-gray-900 transition-all duration-300 transform hover:-translate-y-1"
+                    onClick={() => onTestSelect(test.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && onTestSelect(test.id)}
+                >
+                    {test.icon}
+                    <h2 className="text-white font-bold text-sm leading-tight transition-colors group-hover:text-amber-400">{test.title}</h2>
+                </div>
+            ))}
         </div>
-
-        {/* Grid of Tests */}
-        <div className="p-4 sm:p-8 bg-[#0c0c0c]">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                {testsData.map((test) => (
-                    <div 
-                        key={test.id} 
-                        className="group border-2 border-gray-800 rounded-lg bg-gray-900/50 flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:border-amber-400 hover:bg-gray-900 transition-all duration-300 transform hover:-translate-y-1"
-                        onClick={() => onTestSelect(test.id)}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => e.key === 'Enter' && onTestSelect(test.id)}
-                    >
-                        {test.icon}
-                        <h2 className="text-white font-bold text-sm leading-tight transition-colors group-hover:text-amber-400">{test.title}</h2>
-                    </div>
-                ))}
-            </div>
-        </div>
-    </>
+    </div>
 );
 
 
 const TestsPage: React.FC = () => {
     const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
+    const [toastMessage, setToastMessage] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleBack = () => {
         setSelectedTestId(null);
+    };
+
+    const handleImportClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const text = e.target?.result;
+                if (typeof text !== 'string') throw new Error("File could not be read");
+                const data = JSON.parse(text);
+
+                if (typeof data !== 'object' || data === null) {
+                    throw new Error("Invalid JSON format.");
+                }
+
+                if (window.confirm("¿Estás seguro de que quieres importar estos datos? Se sobrescribirán todos los resultados de tests existentes.")) {
+                    saveTestResults(data);
+                    setToastMessage('Datos importados. La página se recargará.');
+                    setTimeout(() => window.location.reload(), 2000);
+                }
+            } catch (error) {
+                console.error("Error importing data:", error);
+                const message = error instanceof Error ? error.message : 'Unknown error';
+                setToastMessage(`Error al importar: ${message}`);
+                setTimeout(() => setToastMessage(null), 3000);
+            } finally {
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = '';
+                }
+            }
+        };
+        reader.readAsText(file);
+    };
+    
+    const handleExport = () => {
+        try {
+            const data = getTestResults();
+            if (Object.keys(data).length === 0) {
+                 setToastMessage('No hay datos para exportar.');
+                 setTimeout(() => setToastMessage(null), 3000);
+                 return;
+            }
+
+            const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
+                JSON.stringify(data, null, 2)
+            )}`;
+            const link = document.createElement("a");
+            link.href = jsonString;
+            const date = new Date().toISOString().split('T')[0];
+            link.download = `hyrox_test_results_${date}.json`;
+            link.click();
+            setToastMessage('Datos exportados correctamente.');
+            setTimeout(() => setToastMessage(null), 3000);
+        } catch (error) {
+            console.error("Error exporting data:", error);
+            setToastMessage('Error al exportar los datos.');
+            setTimeout(() => setToastMessage(null), 3000);
+        }
     };
 
     const renderSelectedTest = () => {
@@ -123,7 +183,32 @@ const TestsPage: React.FC = () => {
 
     return (
         <div className="bg-[#0c0c0c] min-h-screen text-white font-sans">
+            <div className="text-center p-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter mb-2">Test VAM & Ergómetros</h1>
+                <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">Selecciona un test para ver los detalles e introducir tus resultados.</p>
+            </div>
+            
+            <div className="px-4 sm:px-8 pb-8">
+                 <div className="max-w-7xl mx-auto border-2 border-gray-800 rounded-lg bg-gray-900/50 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="text-center sm:text-left">
+                        <h3 className="font-bold text-amber-400">Gestión de Datos</h3>
+                        <p className="text-gray-400 text-sm">Guarda una copia de seguridad de tus resultados o impórtalos.</p>
+                    </div>
+                    <div className="flex gap-3">
+                        <input type="file" ref={fileInputRef} onChange={handleFileChange} accept=".json" className="hidden" />
+                        <button onClick={handleImportClick} className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Importar</button>
+                        <button onClick={handleExport} className="bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-lg transition-colors">Exportar</button>
+                    </div>
+                </div>
+            </div>
+
            <TestsGrid onTestSelect={setSelectedTestId} />
+
+           {toastMessage && (
+                <div className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 text-white py-2 px-5 rounded-lg shadow-lg border border-amber-400 animate-toast z-50">
+                    {toastMessage}
+                </div>
+            )}
         </div>
     );
 };

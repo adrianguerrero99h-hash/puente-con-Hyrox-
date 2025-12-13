@@ -1,3 +1,4 @@
+
 import type { TrainingData } from './types';
 
 export const trainingData: TrainingData = {
@@ -71,7 +72,7 @@ export const trainingData: TrainingData = {
                 ]
             }
         ],
-        notes: 'RESPETA LOS RITMOS DE ZONA PAUTADAS (NO TE ACELERES)\nLOS DESCANSOS EMPIEZAN A REDUCIRSE Y MANTENER LOS UMBRALES O ZONAS CADA VEZ SE VUELVE MÁS COMPLEJO PERO… ESO ES LO QUE VA A MEJORAR CONSTANTEMENTE A PARTIR DE AHORA'
+        notes: 'RESPETA LOS RITMOS DE ZONA PAUTADAS (NO TE ACELERES)\nLOS DESCANSOS EMPIEZAN A REDUCIRSE Y MANTENER LOS UMBRALES O ZONAS CADA VEZ SE VUELVE MÁS COMPLEJO PERO… ESO ES LO QUE VA A MEJORAR CONSTEMENTE A PARTIR DE AHORA'
     },
     '2025-08-20': {
         week: 'Acumulación semana 3',
@@ -234,12 +235,7 @@ export const trainingData: TrainingData = {
                         title: 'RODAJE OBLIGATORIO',
                         items: [
                             '5´ Run (20” más lento que tu Ritmo Z2 del Test Vam) o (RPE 4-5)',
-                            'Y DIRECTO A'
-                        ]
-                    },
-                    {
-                        title: '',
-                        items: [
+                            'Y DIRECTO A',
                             '- 4 Km Run (75% Fc max) o (Ritmo Z2) / (RPE 5)',
                             'Y DIRECTO A',
                             '- 2 Km Run (85-90% Fc max) o (Ritmo Z3) / (RPE 7)',
@@ -989,7 +985,7 @@ export const trainingData: TrainingData = {
                 ]
             }
         ],
-        notes: 'Tu Ritmo Hyrox debería estar en torno a tu Z4 (±5”).\nRespeta los ritmos pautados (acelera cuando toque).'
+        notes: 'Tu Ritmo Hyrox debería estar en torno a tu Z4 (±5”).\nRespeta los ritmos pautados (acelera quando toque).'
     },
     '2025-09-16': {
         week: 'Transición semana 2',
@@ -1403,7 +1399,7 @@ export const trainingData: TrainingData = {
                 ]
             }
         ],
-        notes: 'Tu Ritmo Hyrox debería estar en torno a tu Z4 (+5"). RESPETA LOS RITMOS PAUTADOS!!! (Acelera cuando toque)'
+        notes: 'Tu Ritmo Hyrox debería estar en torno a tu Z4 (+5"). RESPETA LOS RITMOS PAUTADOS!!! (Acelera quando toque)'
     },
     '2025-10-01': {
         week: 'PREPARATORIO ESPECÍFICO REALIZACIÓN SEMANA 1',
@@ -1811,12 +1807,7 @@ export const trainingData: TrainingData = {
                     },
                     {
                         title: 'BLOQUE 3',
-                        items: [
-                            '150m F. Carry (P.0)',
-                            '30m Sled Pull (P.O +25kg)',
-                            '150m F. Carry (P.0)',
-                            '1000M Run'
-                        ]
+                        items: ['150m F. Carry (P.0)', '30m Sled Pull (P.O +25kg)', '150m F. Carry (P.0)', '1000M Run']
                     }
                 ]
             }
@@ -2126,7 +2117,7 @@ export const trainingData: TrainingData = {
                         ]
                     }
                 ],
-                notes: 'VOLVEMOS A ACUMULAR UN MAYOR VOLVEMEN DE KILOMETROS A MEDIA-BAJA INTENSIDAD, NO SOLO POR LA IMPORTANCIA DE SEGUIR MEJORANDO MECÁNICA Y FISIOLOGICAMENTE, SINO QUE TAMBIEN, POR SU AJUSTE CON EN EL PERIODO DE TRABAJO DE FUERZA EN LA ESTRUCTURA SEMANAL.'
+                notes: 'VOLVEMOS A ACUMULAR UN MAYOR VOLUMEN DE KILOMETROS A MEDIA-BAJA INTENSIDAD, NO SOLO POR LA IMPORTANCIA DE SEGUIR MEJORANDO MECÁNICA Y FISIOLOGICAMENTE, SINO QUE TAMBIEN, POR SU AJUSTE CON EN EL PERIODO DE TRABAJO DE FUERZA EN LA ESTRUCTURA SEMANAL.'
             }
         ]
     },
@@ -2156,7 +2147,7 @@ export const trainingData: TrainingData = {
                         ]
                     }
                 ],
-                notes: 'En el Pull up.. buscamos máximas reps dejando siempre 2 en reserva o lo que es lo mismo, parar de trabajar cuando crea que solo pueda hacer 2 más. Si no eres capaz de realizar Pull up, asiste con goma para llegar a un máximo de 5 reps (rir 0-1)'
+                notes: 'En el Pull up.. buscamos máximas reps dejando siempre 2 en reserva o lo que es lo mismo, parar de trabajar quando crea que solo pueda hacer 2 más. Si no eres capaz de realizar Pull up, asiste con goma para llegar a un máximo de 5 reps (rir 0-1)'
             },
             {
                 letter: 'B',
@@ -2445,7 +2436,7 @@ export const trainingData: TrainingData = {
                 ]
             }
         ],
-        notes: 'Respeta los ritmos de zona pautadas (no te aceleres). ¡Acelera cuando toque!'
+        notes: 'Respeta los ritmos de zona pautadas (no te aceleres). ¡Acelera quando toque!'
     },
     '2025-11-08': {
         week: 'Preparatorio específico ajuste transformación semana 6..',
@@ -2500,6 +2491,529 @@ export const trainingData: TrainingData = {
         week: 'Preparatorio específico ajuste transformación semana 6..',
         day: 7,
         title: 'Día de descanso',
+        restDay: true,
+        sections: []
+    },
+    '2025-11-10': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 1,
+        title: 'FUERZA BÁSICA Y ACONDICIONAMIENTO',
+        sections: [
+            {
+                letter: 'W',
+                title: 'WARM UP OBLIGATORIO',
+                exercises: [
+                    {
+                        title: '3 RONDAS FOR QUALITY',
+                        items: [
+                            '6 / 6 DL unipodal (2×24/16kg)',
+                            '25m Farmer carry unilateral en rack (1×24/16kg)',
+                            '12 Russian Swing (1×24/16kg)',
+                            '1´ Rest'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'A',
+                title: 'WORKOUT',
+                exercises: [
+                    {
+                        title: '4 RONDAS FOR TIME',
+                        items: [
+                            '12 / 9 Cal Assault',
+                            '12,5m Sled Drag (P.O PULL PRO)',
+                            '6 DL (65-70% de tu 3RM) o (RPE 7-8 tras última rep)',
+                            '12,5m Sled Pull (P.O PULL PRO)',
+                            '200m Run (RH o Superior)',
+                            '2´ Rest'
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    '2025-11-11': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 2,
+        title: 'INTERUMBRALES',
+        sections: [
+            {
+                letter: 'A',
+                title: 'RODAJE OBLIGATORIO',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            '5´ Run (20” más lento que tu Ritmo Z2 del Test Vam) o (RPE 4-5)',
+                            'Y DIRECTO A'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'MAIN SET',
+                exercises: [
+                    {
+                        title: '4 × 12´ Run de la siguiente manera:',
+                        items: [
+                            '3 × 2´ Run (Ritmo Z2) / 2´ Run (Ritmo Z4)',
+                            '3´ Rest (caminando)'
+                        ]
+                    }
+                ]
+            }
+        ],
+        notes: '* Si no eres capaz de que tu pulse baje a un 75-80% de Fc Max en el descanso trabaja de esta manera:\n* 3 × 2´ Run (Ritmo Z2) / 1´ Run (Ritmo Z3) / 1´ Run (Ritmo Z4)\n\nEl objetivo es acumular tiempo de trabajo en zonas de “umbral de potencia funcional” o FTP, es el momento de que nuestro cuerpo se vuelva eficiente en ritmos más rápidos y que nuestro organismo sea “capaz” de resintetizar la producción de lactato de una manera cada vez más rápida y sostenida.'
+    },
+    '2025-11-12': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 3,
+        title: 'FUERZA ESPECÍFICA + TRANSICIONES',
+        sections: [
+            {
+                letter: 'W',
+                title: 'WARM UP OBLIGATORIO',
+                exercises: [
+                    {
+                        title: '3 RONDAS FOR QUALITY',
+                        items: [
+                            '2´ Bikerg (RPE 6)',
+                            '10 Side Lunge Alterno',
+                            '10 T2B',
+                            'NO Rest',
+                            '5´ REST Y DIRECTO'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'A',
+                title: 'FUERZA',
+                exercises: [
+                    {
+                        title: '4 RONDAS FOR QUALITY (Bi-serie)',
+                        items: [
+                            '6 / 6 Spilt Squat (2×20/15kg)',
+                            '8 / 5 Pull up (bw)',
+                            '2´ Rest',
+                            '5´ REST ADICIONAL Y DIRECTO'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'METCON',
+                exercises: [
+                    {
+                        title: '4 RONDAS FOR TIME',
+                        items: [
+                            '250/200m Ski Erg (Ritmo T500) / (RPE 9)',
+                            '20m W. Lunge (bw)',
+                            '10m Sled Push UB (80-85% TCM)',
+                            '100m Run (RH)',
+                            '1´ 30 Rest'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'C',
+                title: 'ENGINE',
+                exercises: [
+                    {
+                        title: 'FOR TIME',
+                        items: [
+                            '2000/1800m Bikerg (RPE 8)',
+                            '25m Sled Push (P.O)',
+                            '12 Hang Power Clean & press (2×17,5/12,5kg)',
+                            '25 Wall Ball (P.O)',
+                            '2´ REST Y DIRECTO A',
+                            '25m Sled Push (P.O)',
+                            '12 Snatch Alterno (1×17,5/12,5kg)',
+                            '25 Wall Ball (P.O)',
+                            '1000m Run (RH)'
+                        ]
+                    }
+                ]
+            }
+        ],
+        notes: 'En las transiciones realiza el walking lunge en el carril del trineo (20m = 10+10) para acabar en el trineo y empujar directo'
+    },
+    '2025-11-13': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 4,
+        title: 'DÍA DE DESCANSO OBLIGATORIO',
+        restDay: true,
+        sections: []
+    },
+    '2025-11-14': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 5,
+        title: 'VO2 MAX EXTENSIVA + POTENCIA AERÓBICA CRÍTICA',
+        sections: [
+            {
+                letter: 'A',
+                title: 'WARM UP',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            '1 Km Run (Ritmo Z2) / (RPE 4-5)',
+                            '2´ REST Y DIRECTO A',
+                            '4 × 60m Run progresivo (RPE 7) (+ 1 en RPE x serie) / 50” rest',
+                            '2´10 REST ADICIONAL (3´) Y DIRECTO'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'MAIN SET',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            '1 × 800m Run (RPE 9 al finalizar la serie) / Rest 1:1',
+                            '2 × 6´ Run (90% de tu VAM) / (Ritmo Z4) / 3´ Rest',
+                            '2 × 6´ Run (90% de tu VAM) / (Ritmo Z4) / 4´ Rest',
+                            '2´ REST ADICIONAL TRAS ÚLTIMO DESCANSO (6´) Y DIRECTO A',
+                            '1 × 800m Run (Ritmo Z5) / * si te encuentras bien muscularmente ponte como reto el ritmo del 1er 800.',
+                            'NO COOL DOWN'
+                        ]
+                    }
+                ]
+            }
+        ],
+        notes: 'RESPETA LOS RITMOS DE ZONA PAUTADAS (NO TE ACELERES)\nACELERA CUANDO TOQUE!\nEl 90% de tu test Vam es una media de 25” más lento que tu Vam que suele corresponder con tu Z4, si te encuentras cómodo a ese ritmo en el primer bloque de 6´ puedes aumentar el ritmo ligeramente a unos 5-10” más rápido'
+    },
+    '2025-11-15': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 6,
+        title: 'ACONDICIONAMIENTO ESPECÍFICO (HY-SPRINT)',
+        sections: [
+            {
+                letter: 'A',
+                title: 'FOR QUALITY',
+                exercises: [
+                    {
+                        title: 'Estructura',
+                        items: [
+                            '400m Run (Ritmo Z4-Z5) de inicio y en bloques impares.',
+                            '1000m Bikerg o 1250 Ass (RPE 8) en bloques pares entre cada ejercicio.',
+                            'Ejemplo: Run - Ski , Bikerg - Push, Run - Pull, Bikerg - Burpee…'
+                        ]
+                    },
+                    {
+                        title: 'Workouts',
+                        items: [
+                            'A) 500m Ski (RH)',
+                            'B) 25M S. Push (P.O + 25kg)',
+                            'C) 25M S. Pull (P.O + 25kg)',
+                            'D) 40m Burpee Broad Jump',
+                            '2´ REST OBLIGATORIO Y DIRECTO A',
+                            'E) 500m Row Erg (RH)',
+                            'F) 100m Farmer Carry',
+                            'G) 50m S. Lunge (P.O)',
+                            'H) 50 Wall Ball (P.O)'
+                        ]
+                    }
+                ]
+            }
+        ],
+        notes: '* Buscamos adaptaciones para workouts a ritmos altos de fatiga.\n* Busca apretar y afianzar tus tiempos en cada wod'
+    },
+    '2025-11-16': {
+        week: 'Preparatorio específico ajuste transformación semana 7',
+        day: 7,
+        title: 'RODAJE REGENERATIVO',
+        sections: [
+            {
+                letter: 'A',
+                title: 'FOR QUALITY',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            'Acumula 30 a 40´ Run (RPE 5)'
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    '2025-11-17': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 1,
+        title: 'ENGINE',
+        sections: [
+            {
+                letter: 'A',
+                title: 'WARM UP',
+                exercises: [
+                    {
+                        title: '3 RONDAS FOR QUALITY',
+                        items: [
+                            '8 Front Squat (40/25kg)',
+                            '8 / 5 Pull up (BW) / (Escalado: 10 / 8 Ring row)',
+                            '1´ Row (Sprint progesivo) (RPE 7 y cada 15” + 1 en RPE)',
+                            '1´ REST',
+                            '2´ REST TOTAL ADICIONAL Y DIRECTO A'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'BLOCK 1',
+                exercises: [
+                    {
+                        title: '2 RONDAS FOR QUALITY',
+                        items: [
+                            '2000m Bikerg (RPE 8) o (80% FTP)',
+                            '10 Burpee + 10 Burpee Box Jump',
+                            '800m Ski erg (3” más rápido que RH )',
+                            '400m Run (Ritmo Z3)',
+                            '20 Rear Lunge (40/25kg) *Zercher',
+                            '400m Run (Ritmo RH)',
+                            '2´ Rest entre rondas',
+                            'NO REST ADICIONAL Y DIRECTO A'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'C',
+                title: 'BLOCK 2',
+                exercises: [
+                    {
+                        title: '2 RONDAS FOR QUALITY',
+                        items: [
+                            '1500m Bikerg (RPE 8) o (80% FTP)',
+                            '40m Burpee Broad Jump',
+                            '500m Ski erg (3” más rápido que RH )',
+                            '200m Run (Ritmo Z3)',
+                            '40m Walking Lunge (BW)',
+                            '600m Run (Ritmo RH)',
+                            '2´ Rest entre bloques'
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    '2025-11-18': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 2,
+        title: 'INTERUMBRALES',
+        sections: [
+            {
+                letter: 'A',
+                title: 'RODAJE',
+                exercises: [
+                    {
+                        title: 'RODAJE OBLIGATORIO',
+                        items: [
+                            '5´ Run (20” más lento que tu Ritmo Z2 del Test Vam) o (RPE 4-5)',
+                            'Y DIRECTO A'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'MAIN SET',
+                exercises: [
+                    {
+                        title: '3 × 12´ Run de la siguiente manera:',
+                        items: [
+                            '3 × 1´ Run (Ritmo Z2) / 3´ Run (Ritmo Z4)',
+                            '4´ Rest (Caminando o trote suave si te ves bien)'
+                        ]
+                    }
+                ]
+            }
+        ],
+        notes: '* Si no eres capaz de que tu pulse baje a un 75-80% de Fc Max en el descanso trabaja de esta manera:\n* 3 × 1´ Run (Ritmo Z2) / 1´ Run (Ritmo Z3) / 2´ Run (Ritmo Z4)\nEl objetivo es acumular tiempo de trabajo en zonas de “umbral de potencia funcional” , es el momento de que nuestro cuerpo se vuelva eficiente en ritmos más rápidos y que nuestro organismo sea “capaz” de resintetizar la producción de lactato de una manera cada vez más rápida y sostenida.'
+    },
+    '2025-11-19': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 3,
+        title: 'DÍA DE DESCANSO OBLIGATORIO',
+        restDay: true,
+        sections: []
+    },
+    '2025-11-20': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 4,
+        title: 'POTENCIA AERÓBICA (THRESHOLD)',
+        sections: [
+            {
+                letter: 'A',
+                title: 'WARM UP',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            '1200m Run (3 vueltas en pista) / (RPE 5)'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'NEUROMUSCULAR',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            '5 × 30” (RPE 9-10) / 1´ 30 Rest',
+                            'Utiliza la primera serie para ir de manera progresiva (RPE 7 →RPE 9-10)',
+                            '2´30 REST ADICIONAL TRAS ÚLTIMO DESCANSO Y DIRECTO A'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'C',
+                title: 'MAIN SET',
+                exercises: [
+                    {
+                        title: '',
+                        items: [
+                            '1 × 500m Run (Ritmo VAM) / Rest 1:1',
+                            '1 × 500m Run (Ritmo Z5)',
+                            '4´ REST Y DIRECTO A',
+                            '1000m Run (Ritmo VAM) / Rest 1:1',
+                            '1000m Run (RH) / 2´ Rest',
+                            '1000m Run (Ritmo VAM) / Rest 1:1',
+                            '1000m Run (RH)',
+                            'NO COOL DOWN'
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    '2025-11-21': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 5,
+        title: 'FUERZA ESPECÍFICA & ERGÓMETROS',
+        sections: [
+            {
+                letter: 'A',
+                title: 'FUERZA ESPECÍFICA I',
+                exercises: [
+                    {
+                        title: '4 RONDAS FOR QUALITY',
+                        items: [
+                            '10m Sled Pull (Solo brazos) / (50/25kg + trineo) o (RPE 8)',
+                            '12 / 8 Push Up',
+                            '1´ 30 Rest'
+                        ]
+                    },
+                    {
+                        title: '4 RONDAS FOR QUALITY',
+                        items: [
+                            '10m Sled Drag (DL + Tirón) / (P.O PULL PRO +25/15 o RPE 8-9)',
+                            '1´ Rest',
+                            'Y DIRECTO A'
+                        ]
+                    },
+                    {
+                        title: '2 RONDAS FOR QUALITY',
+                        items: [
+                            '20m Sled Drag / (P.O PULL PRO) * Busca máxima velocidad de ejecución',
+                            '1´ Rest'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'FUERZA ESPECÍFICA II',
+                exercises: [
+                    {
+                        title: '4 RONDAS FOR QUALITY',
+                        items: [
+                            '6 Press Banca inclinado (2xDb) / (RIR 2) / (RPE 8 TRAS ÚLTIMA REP)',
+                            '12 Push Press Wall ball Heavy * carga superior a la que compites',
+                            '1´30 Rest'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'C',
+                title: 'ERGÓMETROS (VO2 MAX INTENSIVO)',
+                exercises: [
+                    {
+                        title: 'SKI ERG',
+                        items: [
+                            '5 × 45´” (Ritmo T500) / 1´15 Rest',
+                            '5´ REST Y DIRECTO A'
+                        ]
+                    },
+                    {
+                        title: 'ROW ERG',
+                        items: [
+                            '5 × 45´” (Ritmo T500) / 1´15 Rest'
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    '2025-11-22': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 6,
+        title: 'ACONDICIONAMIENTO ESPECÍFICO',
+        sections: [
+            {
+                letter: 'A',
+                title: 'WARM UP',
+                exercises: [
+                    {
+                        title: '3 RONDAS FOR QUALITY',
+                        items: [
+                            '1000/850m Ass (RPE 6)',
+                            '30” Farmer Hold “ Rack “ (2×24/16kg)',
+                            '10 Burpee',
+                            'NO REST',
+                            '3´ REST Y DIRECTO A'
+                        ]
+                    }
+                ]
+            },
+            {
+                letter: 'B',
+                title: 'WORKOUT',
+                exercises: [
+                    {
+                        title: 'FOR QUALITY',
+                        items: [
+                            '1 Km Run (Ritmo RH) y directos a:',
+                            'A) Max Metros Ski erg - (5´ On / 1´ Off)',
+                            'B) Max Metros Sled Push (P.O) - (3´ On / 1´ Off)',
+                            'C) Max Metros Sled Pull (P.O) - (5´ On / 1´ Off)',
+                            'D) Max Metros Burpee Broad Jump - (3´ On / 1´ Off)',
+                            '1 Km Run (Ritmo RH) y directos a:',
+                            'E) Max Metros Row erg - (5´ On / 1´ Off)',
+                            'F) Max Metros F. Carry - (3´ On / 1´ Off)',
+                            'G) Max S. Lunge (P.O) - (5´ On / 1´ Off)',
+                            'H) Wall ball (P.O) - (3 × 2´ On / 1´ Off )'
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    '2025-11-23': {
+        week: 'Preparatorio específico ajuste transformación semana 8',
+        day: 7,
+        title: 'DÍA DE DESCANSO OBLIGATORIO',
         restDay: true,
         sections: []
     }

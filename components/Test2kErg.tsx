@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import TestPageLayout from './TestPageLayout';
+import { getSingleTestResult, saveSingleTestResult } from '../utils/testResults';
 
 interface Test2kErgProps {
     type: 'Ski' | 'Row';
@@ -7,11 +8,19 @@ interface Test2kErgProps {
 }
 
 const Test2kErg: React.FC<Test2kErgProps> = ({ type, onBack }) => {
+    const TEST_ID = `Test2k${type}Erg`;
     const [isEditing, setIsEditing] = useState(false);
     const [time, setTime] = useState(''); 
+
+    useEffect(() => {
+        const savedData = getSingleTestResult(TEST_ID);
+        if (savedData && savedData.time) {
+            setTime(savedData.time);
+        }
+    }, [TEST_ID]);
     
     const handleSave = () => {
-        console.log(`Saving ${type} result:`, time);
+        saveSingleTestResult(TEST_ID, { time });
         setIsEditing(false);
     };
 
@@ -59,7 +68,7 @@ const Test2kErg: React.FC<Test2kErgProps> = ({ type, onBack }) => {
         <TestPageLayout onBack={onBack} title={title}>
             {/* Description */}
             <div className="bg-gray-900/50 border-2 border-gray-800 rounded-lg p-6 mb-8 text-center">
-                <h2 className="text-xl font-bold text-amber-400 mb-4">¿En qué consiste el test de {type}?</h2>
+                <h2 className="text-xl font-bold text-amber-400 mb-4">¿En qué consiste el test de ${type}?</h2>
                 <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                     {description}
                 </p>

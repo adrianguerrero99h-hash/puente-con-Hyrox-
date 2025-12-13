@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { Workout } from '../types';
 import WorkoutSection from './WorkoutSection';

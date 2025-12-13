@@ -5,8 +5,8 @@ interface LoginScreenProps {
 }
 
 const validUsers = [
-    { username: 'Adri', password: '1234' },
-    { username: 'Ivan', password: '1234' }
+    { username: 'adri', password: '1234' },
+    { username: 'ivan', password: '1234' }
 ];
 
 const HyroxLogo = () => (
